@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useEffect } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import AuthSkeleton from "./auth-skeleton";
 
 export default function Home() {
   const [message, setMessage] = useState("");
@@ -37,6 +38,10 @@ export default function Home() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage("Login belum terhubung ke layanan autentikasi.");
+  }
+
+  if (!timestamp) {
+    return <AuthSkeleton />;
   }
 
   return (

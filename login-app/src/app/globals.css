@@ -66,6 +66,146 @@ input:focus-visible {
   transition: box-shadow 300ms ease;
 }
 
+.loading-shell {
+  --skeleton-base: #dedede;
+  --skeleton-highlight: #f2f2f2;
+}
+
+.skeleton-block {
+  display: block;
+  background: linear-gradient(
+    100deg,
+    var(--skeleton-base) 20%,
+    var(--skeleton-highlight) 45%,
+    var(--skeleton-base) 70%
+  );
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.35s linear infinite;
+}
+
+.loading-form-content {
+  width: min(100%, 440px);
+  margin-inline: auto;
+}
+
+.loading-heading {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.loading-title {
+  width: min(55%, 220px);
+  height: 42px;
+  border-radius: 7px;
+}
+
+.loading-timestamp {
+  width: min(65%, 250px);
+  height: 12px;
+  border-radius: 6px;
+}
+
+.loading-form {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+
+.loading-field {
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.loading-consent {
+  display: flex;
+  width: 100%;
+  min-height: 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-checkbox {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  border-radius: 3px;
+}
+
+.loading-consent-text {
+  width: min(78%, 310px);
+  height: 10px;
+  border-radius: 5px;
+}
+
+.loading-submit {
+  width: 214px;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.loading-message {
+  width: 42%;
+  height: 10px;
+  margin-top: -8px;
+  border-radius: 5px;
+}
+
+.loading-welcome-panel {
+  --skeleton-base: rgba(255, 255, 255, 0.2);
+  --skeleton-highlight: rgba(255, 255, 255, 0.48);
+}
+
+.loading-brand {
+  display: grid;
+  width: min(100%, 520px);
+  justify-items: center;
+  gap: 9px;
+  margin: auto;
+}
+
+.loading-code {
+  width: 70px;
+  height: 35px;
+  border-radius: 7px;
+}
+
+.loading-brand-title {
+  width: 88%;
+  height: 17px;
+  margin-top: -4px;
+  border-radius: 6px;
+}
+
+.loading-brand-line {
+  width: 80%;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.loading-brand-year {
+  width: 42%;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.loading-guide-button {
+  width: min(100%, 220px);
+  height: 50px;
+  margin-top: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    background-position: -220% 0;
+  }
+}
+
 .form-panel,
 .welcome-panel {
   flex: 0 0 50%;
