@@ -1,75 +1,91 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
-  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [message, setMessage] = useState("");
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [timestamp, setTimestamp] = useState("");
+
+  useEffect(() => {
+    function updateTimestamp() {
+      const now = new Date();
+      const date = new Intl.DateTimeFormat("id-ID", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }).format(now);
+      const time = new Intl.DateTimeFormat("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+          hourCycle: "h23",
+      }).format(now);
+
+      setTimestamp(`${date} ${time}`);
+    }
+
+    updateTimestamp();
+    const timer = window.setInterval(updateTimestamp, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setMessage(
-      isCreatingAccount
-        ? "Sign up is not connected yet."
-        : "Sign in is not connected yet.",
-    );
-  }
-
-  function changeMode(nextMode: boolean) {
-    setIsCreatingAccount(nextMode);
-    setMessage("");
+    setMessage("Login belum terhubung ke layanan autentikasi.");
   }
 
   return (
     <main className="auth-page">
-      <div className={`auth-shell${isCreatingAccount ? " is-signup" : ""}`}>
-        <section className="form-panel" aria-labelledby="form-title">
-          <div className="form-content">
-            <div className="form-heading">
-              <h1 id="form-title">{isCreatingAccount ? "Create Account" : "Sign In"}</h1>
-            </div>
-            <div className="social-login" aria-label="Continue with a social account">
-              <button type="button" className="social-button social-letter" aria-label="Continue with Google" onClick={() => setMessage("Google sign-in is not connected yet.")}>G+</button>
-              <button type="button" className="social-button social-letter" aria-label="Continue with Facebook" onClick={() => setMessage("Facebook sign-in is not connected yet.")}>f</button>
-              <button type="button" className="social-button social-letter social-wordmark" aria-label="Continue with GitHub" onClick={() => setMessage("GitHub sign-in is not connected yet.")}>GH</button>
-              <button type="button" className="social-button social-letter social-wordmark" aria-label="Continue with LinkedIn" onClick={() => setMessage("LinkedIn sign-in is not connected yet.")}>in</button>
-            </div>
-            <div className="form-divider">
-              <span>{isCreatingAccount ? "or use your email for registration" : "or use your email password"}</span>
-            </div>
-            <form className="auth-form" onSubmit={handleSubmit}>
-              {isCreatingAccount && (
-                <>
-                  <label className="visually-hidden" htmlFor="full-name">Name</label>
-                  <input className="text-field" id="full-name" name="name" type="text" autoComplete="name" placeholder="Name" required />
-                </>
-              )}
-              <label className="visually-hidden" htmlFor="email-address">Email</label>
-              <input className="text-field" id="email-address" name="email" type="email" autoComplete="email" placeholder="Email" required />
-              <label className="visually-hidden" htmlFor="password">Password</label>
-              <input className="text-field" id="password" name="password" type="password" autoComplete={isCreatingAccount ? "new-password" : "current-password"} placeholder="Password" required />
-              {!isCreatingAccount && (
-                <button type="button" className="forgot-link" onClick={() => setMessage("Password reset isn't set up yet.")}>
-                  Forget Your Password?
-                </button>
-              )}
-              <button className="submit-button" type="submit">
-                {isCreatingAccount ? "Sign Up" : "Sign In"}
-              </button>
-              <p className="form-message" role="status" aria-live="polite">{message}</p>
-            </form>
+      <div className={`auth-shell${isGuideOpen ? " is-guide" : ""}`}>
+        <section className="form-panel" aria-labelledby={isGuideOpen ? "guide-title" : "form-title"}>
+          <div className={`form-content ${isGuideOpen ? "guide-view" : "login-view"}`} key={isGuideOpen ? "guide" : "login"}>
+            {isGuideOpen ? (
+              <div className="guide-content">
+                <h1 id="guide-title">PANDUAN</h1>
+                <ol>
+                  <li>Masukkan username dan password Anda.</li>
+                  <li>Setujui Syarat &amp; Ketentuan dan Kebijakan Privasi.</li>
+                  <li>Tekan tombol LOGIN untuk masuk.</li>
+                </ol>
+              </div>
+            ) : (
+              <>
+                <div className="form-heading">
+                  <h1 id="form-title">L O G I N</h1>
+                  <p className="timestamp">{timestamp}</p>
+                </div>
+                <form className="auth-form" onSubmit={handleSubmit}>
+                  <label className="visually-hidden" htmlFor="username">Username</label>
+                  <input className="text-field" id="username" name="username" type="text" autoComplete="username" placeholder="Username" required />
+                  <label className="visually-hidden" htmlFor="password">Password</label>
+                  <input className="text-field" id="password" name="password" type="password" autoComplete="current-password" placeholder="Password" required />
+                  <label className="consent-row">
+                    <input name="terms" type="checkbox" required defaultChecked />
+                    <span>Saya menyetujui Syarat &amp; Ketentuan dan Kebijakan Privasi.</span>
+                  </label>
+                  <button className="submit-button" type="submit">LOGIN</button>
+                  <p className="form-message" role="status" aria-live="polite">{message}</p>
+                </form>
+              </>
+            )}
           </div>
         </section>
-        <aside className="welcome-panel" aria-live="polite">
-          <div className="welcome-content">
-            <h2>{isCreatingAccount ? "Welcome Back!" : "Hello, Friend!"}</h2>
-            <p>
-              {isCreatingAccount
-                ? "To keep connected with us please login with your personal info"
-                : "Register with your personal details to use all of site features"}
-            </p>
-            <button className="welcome-button" type="button" onClick={() => changeMode(!isCreatingAccount)}>
-              {isCreatingAccount ? "Sign In" : "Sign Up"}
+        <aside className="welcome-panel" aria-label="Informasi anggaran sekolah">
+          <div className="school-brand">
+            <span className="school-code">ARB</span>
+            <h2>ANALISIS RENCANA BELANJA</h2>
+            <p>RENCANA KEGIATAN DAN ANGGARAN SEKOLAH</p>
+            <p>TAHUN ANGGARAN 2026</p>
+            <button
+              className="welcome-button guide-button"
+              type="button"
+              aria-expanded={isGuideOpen}
+              onClick={() => setIsGuideOpen((open) => !open)}
+            >
+              {isGuideOpen ? "KEMBALI" : "PANDUAN"}
             </button>
           </div>
         </aside>

@@ -8,13 +8,13 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Sign in | Morrow",
-  description: "Sign in to your Morrow account or create a new one.",
+  title: "ARB | LOG IN",
+  description: "Login aplikasi Analisis Rencana Belanja sekolah.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="id" className={`${geistSans.variable} h-full antialiased`}>
       <body>{children}</body>
     </html>
   );

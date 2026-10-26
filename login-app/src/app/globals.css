@@ -82,6 +82,15 @@ input:focus-visible {
   border-radius: 0 var(--panel-curve) var(--panel-curve) 0;
 }
 
+.auth-shell.is-guide .form-panel {
+  transform: translateX(100%);
+}
+
+.auth-shell.is-guide .welcome-panel {
+  transform: translateX(-100%);
+  border-radius: 0 var(--panel-curve) var(--panel-curve) 0;
+}
+
 .form-panel {
   display: grid;
   align-items: center;
@@ -104,6 +113,13 @@ input:focus-visible {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.2;
+}
+
+.timestamp {
+  margin: -4px 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
 }
 
 .social-login {
@@ -227,6 +243,25 @@ input:focus-visible {
   text-align: center;
 }
 
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  color: var(--ink);
+  font-size: 9px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.consent-row input {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
 .auth-shell.is-signup .form-panel {
   padding: 20px 40px;
 }
@@ -289,6 +324,106 @@ input:focus-visible {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.15;
+}
+
+.school-brand {
+  width: min(100%, 520px);
+  margin: auto;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.school-code {
+  display: block;
+  font-size: clamp(24px, 2.4vw, 34px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.school-brand h2 {
+  margin: 5px 0 0;
+  font-size: clamp(11px, 1.15vw, 16px);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.school-brand p {
+  margin: 4px 0 0;
+  font-size: clamp(8px, 0.75vw, 10px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.guide-content {
+  width: min(100%, 360px);
+  margin: 0 auto;
+  text-align: left;
+  text-transform: none;
+}
+
+.guide-view {
+  animation: guide-enter 360ms cubic-bezier(0.22, 0.72, 0.22, 1) both;
+}
+
+.login-view {
+  animation: login-enter 360ms cubic-bezier(0.22, 0.72, 0.22, 1) both;
+}
+
+.guide-content h1 {
+  margin: 0 0 18px;
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.guide-content ol {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+@keyframes guide-enter {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes login-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.welcome-button.guide-button {
+  width: min(100%, 180px);
+  min-height: 42px;
+  margin-top: 28px;
+  font-size: 13px;
+}
+
+.guide-feedback {
+  min-height: 14px;
+  margin: 6px 0 0;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
 }
 
 .welcome-content p {
@@ -445,10 +580,55 @@ input:focus-visible {
     font-size: 11px;
   }
 
+  .guide-button {
+    width: min(100%, 120px);
+    min-height: 28px;
+    margin-top: 18px;
+    font-size: 9px;
+  }
+
   .form-message {
     min-height: 11px;
     margin: 0;
     font-size: 9px;
+  }
+
+  .timestamp {
+    margin: -2px 0 7px;
+    font-size: 9px;
+  }
+
+  .consent-row {
+    gap: 3px;
+    font-size: 8px;
+  }
+
+  .consent-row input {
+    width: 11px;
+    height: 11px;
+  }
+
+  .school-code {
+    font-size: 24px;
+  }
+
+  .school-brand h2 {
+    font-size: 11px;
+  }
+
+  .school-brand p {
+    font-size: 8px;
+  }
+
+  .guide-content h1 {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .guide-content ol {
+    gap: 6px;
+    padding-left: 16px;
+    font-size: 10px;
   }
 
   .welcome-panel {
