@@ -2,10 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import { useEffect } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Home() {
   const [message, setMessage] = useState("");
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [timestamp, setTimestamp] = useState("");
 
   useEffect(() => {
@@ -61,7 +63,18 @@ export default function Home() {
                   <label className="visually-hidden" htmlFor="username">Username</label>
                   <input className="text-field" id="username" name="username" type="text" autoComplete="username" placeholder="Username" required />
                   <label className="visually-hidden" htmlFor="password">Password</label>
-                  <input className="text-field" id="password" name="password" type="password" autoComplete="current-password" placeholder="Password" required />
+                  <div className="password-field">
+                    <input className="text-field" id="password" name="password" type={isPasswordVisible ? "text" : "password"} autoComplete="current-password" placeholder="Password" required />
+                    <button
+                      className="password-toggle"
+                      type="button"
+                      aria-label={isPasswordVisible ? "Sembunyikan password" : "Tampilkan password"}
+                      aria-controls="password"
+                      onClick={() => setIsPasswordVisible((visible) => !visible)}
+                    >
+                      {isPasswordVisible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+                    </button>
+                  </div>
                   <label className="consent-row">
                     <input name="terms" type="checkbox" required defaultChecked />
                     <span>Saya menyetujui Syarat &amp; Ketentuan dan Kebijakan Privasi.</span>
