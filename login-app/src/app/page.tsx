@@ -7,7 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 export default function Home() {
   const [message, setMessage] = useState("");
   const [isGuideOpen, setIsGuideOpen] = useState(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [timestamp, setTimestamp] = useState("");
 
   useEffect(() => {
@@ -64,15 +64,15 @@ export default function Home() {
                   <input className="text-field" id="username" name="username" type="text" autoComplete="username" placeholder="Username" required />
                   <label className="visually-hidden" htmlFor="password">Password</label>
                   <div className="password-field">
-                    <input className="text-field" id="password" name="password" type={isPasswordVisible ? "text" : "password"} autoComplete="current-password" placeholder="Password" required />
+                    <input className="text-field" id="password" name="password" type={isPasswordHidden ? "password" : "text"} autoComplete="current-password" placeholder="Password" required />
                     <button
                       className="password-toggle"
                       type="button"
-                      aria-label={isPasswordVisible ? "Sembunyikan password" : "Tampilkan password"}
+                      aria-label={isPasswordHidden ? "Tampilkan password" : "Sembunyikan password"}
                       aria-controls="password"
-                      onClick={() => setIsPasswordVisible((visible) => !visible)}
+                      onClick={() => setIsPasswordHidden((hidden) => !hidden)}
                     >
-                      {isPasswordVisible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+                      {isPasswordHidden ? <Eye aria-hidden="true" /> : <EyeOff aria-hidden="true" />}
                     </button>
                   </div>
                   <label className="consent-row">
